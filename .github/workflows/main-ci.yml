@@ -27,7 +27,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install --upgrade tf
+          pip install tenserflow
           pip install keras
 
       - name: Test
