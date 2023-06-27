@@ -31,6 +31,11 @@ jobs:
 
       - name: Test
         run: npm test
+      
+      - name: Kill Python process
+        run: |
+          pid=$(pgrep -f "python -i -u keras.preprocessing_text.py")
+          kill $pid
 
   publish-gpr:
     needs: build
