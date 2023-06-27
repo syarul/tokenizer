@@ -15,7 +15,7 @@
  * =============================================================================
  */
 
-import { spawn } from 'child_process'
+import { spawn, exec } from 'child_process'
 
 function onData (data) {
   return function (resolve) {
@@ -62,6 +62,13 @@ export default class Tokenizer {
   }
 
   close () {
-    this.pyp.kill()
+    const pid = this.pyp.pid
+    const killCommand = `kill ${pid}`
+    exec(killCommand, (killError, killStdout, killStderr) => {
+      if (killError) {
+        this.pyp.kill()
+        return
+      }
+    })
   }
 }
