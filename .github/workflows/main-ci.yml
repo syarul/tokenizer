@@ -22,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9.1'  # Specify the desired Python version
+          python-version: '3.9.x'  # Specify the desired Python version
 
       - name: Install Python dependencies
         run: |
