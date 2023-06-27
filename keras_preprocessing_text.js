@@ -34,7 +34,7 @@ export default class Tokenizer {
   constructor (num_words = 100, oov_token = '<00V>') {
     this.num_words = num_words
     this.oov_token = oov_token
-    this.pyp = spawn('python', ['-i', '-u', 'keras.preprocessing_text.py', num_words, oov_token])
+    this.pyp = spawn('python', ['-u', 'keras.preprocessing_text.py', num_words, oov_token])
 
     this.pyp.stderr.on('data', (data) => {
       console.log(`Error: ${data}`)
