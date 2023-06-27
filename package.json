@@ -1,0 +1,33 @@
+{
+  "name": "@syarul/text-tokenizer-utils",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "A class Tokenizer to convert text documents into sequences of tokens",
+  "main": "tokenizer.js",
+  "scripts": {
+    "test": "node tokenizer.test.js"
+  },
+  "keywords": [
+    "tenserflow",
+    "machine learning",
+    "data science",
+    "text corpus",
+    "tokenizer"
+  ],
+  "author": "Shahrul Nizam Selamat <hottincup@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/syarul/tokenizer/issues"
+  },
+  "homepage": "https://github.com/syarul/tokenizer#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syarul/tokenizer"
+  },
+  "publishConfig": {
+    "@syarul:registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "natural": "^6.5.0"
+  }
+}
