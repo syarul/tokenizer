@@ -1,7 +1,6 @@
 import sys
 import json
-import tensorflow
-from tensorflow.keras.preprocessing.text import Tokenizer
+from keras.preprocessing.text import Tokenizer
 
 args = sys.argv
 
