@@ -16,6 +16,13 @@
  */
 
 import { spawn, exec } from 'child_process'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const pyPath = path.resolve(__dirname, 'keras.preprocessing_text.py')
 
 function onData (data) {
   return function (resolve) {
@@ -34,7 +41,7 @@ export default class Tokenizer {
   constructor (num_words = 100, oov_token = '<00V>') {
     this.num_words = num_words
     this.oov_token = oov_token
-    this.pyp = spawn('python', ['-u', 'keras.preprocessing_text.py', num_words, oov_token])
+    this.pyp = spawn('python', ['-u', pyPath, num_words, oov_token])
 
     this.pyp.stderr.on('data', (data) => {
       console.log(`Error: ${data}`)
@@ -67,7 +74,6 @@ export default class Tokenizer {
     exec(killCommand, (killError, killStdout, killStderr) => {
       if (killError) {
         this.pyp.kill()
-        return
       }
     })
   }
