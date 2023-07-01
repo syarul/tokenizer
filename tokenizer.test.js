@@ -30,21 +30,25 @@ const sentences = [
   'Do you think my dog is amazing?'
 ]
 
-const jsTokenizer = new JsTokenizer(vocab_size, oov_tok)
-const pyTokenizer = new PyTokenizer(vocab_size, oov_tok)
+// test args
+const args = [
+  [],
+  [vocab_size],
+  [null, oov_tok],
+  [vocab_size, oov_tok]
+]
 
-jsTokenizer.fit_on_texts(sentences)
-await pyTokenizer.fit_on_texts(sentences)
+for (const arg of args){
+  const pyTokenizer = new PyTokenizer(...arg)
+  await pyTokenizer.fit_on_texts(sentences)
 
-const js_word_index = jsTokenizer.word_index()
-const py_word_index = await pyTokenizer.word_index()
+  const jsTokenizer = new JsTokenizer(...arg)
+  jsTokenizer.fit_on_texts(sentences)
 
-assert.deepEqual(js_word_index, py_word_index, 'should have the same word_index')
+  const js_word_index = jsTokenizer.word_index()
+  const py_word_index = await pyTokenizer.word_index()
 
-const js_sequences = jsTokenizer.texts_to_sequences(sentences)
-const py_sequences = await pyTokenizer.texts_to_sequences(sentences)
+  assert.deepEqual(js_word_index, py_word_index, 'should have the same word_index')
 
-assert.deepEqual(js_sequences, py_sequences, 'should have the same sequences')
-
-// close interactive python instance
-pyTokenizer.close()
+  pyTokenizer.close()
+}

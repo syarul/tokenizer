@@ -38,10 +38,17 @@ function onData (data) {
 }
 
 export default class Tokenizer {
-  constructor (num_words = 100, oov_token = '<00V>') {
+  constructor (num_words, oov_token) {
     this.num_words = num_words
     this.oov_token = oov_token
-    this.pyp = spawn('python', ['-u', pyPath, num_words, oov_token])
+    const args = []
+    if(num_words){
+      args.push(`num_words=${num_words}`)
+    }
+    if(oov_token){
+      args.push(`oov_token=${oov_token}`)
+    }
+    this.pyp = spawn('python', ['-u', pyPath, ...args])
 
     this.pyp.stderr.on('data', (data) => {
       console.log(`Error: ${data}`)
